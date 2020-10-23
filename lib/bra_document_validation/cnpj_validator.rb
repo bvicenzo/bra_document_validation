@@ -2,11 +2,12 @@
 
 module BraDocumentValidation
   class CNPJValidator < ActiveModel::EachValidator
-    CNPJ_PATTERN = /^(\d{2}\.\d{3}\.\d{3}\/\d{4})-(\d{2})$/.freeze
+    FORMATTED_CNPJ_PATTERN = /\A(\d{2}\.\d{3}\.\d{3}\/\d{4})-(\d{2})\Z/.freeze
+    RAW_CNPJ_PATTERN = /\A\d{14}\Z/.freeze
     NOT_NUMBER_PATTERN = /\D/.freeze
 
     def validate_each(record, attribute, value)
-      return record.errors.add(attribute, :invalid_format) unless CNPJ_PATTERN.match?(value.to_s)
+      return record.errors.add(attribute, :invalid_format) unless document_format.match?(value.to_s)
       full_number = only_numbers_for(value.to_s)
       record.errors.add(attribute, :invalid_verification_digit) if black_listed?(full_number) || !digit_verified?(full_number)
     end
@@ -34,6 +35,10 @@ module BraDocumentValidation
 
     def black_listed?(number)
       number.chars.uniq.size == 1
+    end
+
+    def document_format
+      options[:formatted] ? FORMATTED_CNPJ_PATTERN : RAW_CNPJ_PATTERN
     end
   end
 end
