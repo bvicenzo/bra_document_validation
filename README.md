@@ -32,7 +32,7 @@ However you can pass options if your number is formatted.
 
 ```rb
 validates :document_number, 'bra_document_validation/cpf': { formatted: true }
-validates :document_number, 'bra_document_validation/cnpj': { formatted false }
+validates :document_number, 'bra_document_validation/cnpj': { formatted: false }
 ```
 
 # Messaging
@@ -43,7 +43,7 @@ However you can add a custom message that substitute the above messages.
 
 ```rb
 validates :document_number, 'bra_document_validation/cpf': { message: :invalid }
-validates :document_number, 'bra_document_validation/cnpj': { message 'A custom message' }
+validates :document_number, 'bra_document_validation/cnpj': { message: 'A custom message' }
 ```
 
 ## Development
