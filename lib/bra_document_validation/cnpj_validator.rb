@@ -21,7 +21,7 @@ module BraDocumentValidation
     end
 
     def numbers_for(value)
-      number = value.gsub(NOT_NUMBER_PATTERN, '').split('')
+      number = value.gsub(NOT_NUMBER_PATTERN, '').chars
 
       [
         number.shift(BraDocuments::CNPJGenerator::COMPANY_NUMBER_SIZE).join,
