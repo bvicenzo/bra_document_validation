@@ -1,8 +1,6 @@
 # BraDocumentValidation
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bra_document_validation`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem allows to validate Brazilian documents, CPF and CNPJ, with format and digit verification.
 
 ## Installation
 
@@ -22,7 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```rb
+validates :document_number, 'bra_document_validation/cpf': true
+validates :document_number, 'bra_document_validation/cnpj': true
+```
+
+# Format
+
+By default, it expects a raw document number (only numbers).
+However you can pass options if your number is formatted.
+
+```rb
+validates :document_number, 'bra_document_validation/cpf': { formatted: true }
+validates :document_number, 'bra_document_validation/cnpj': { formatted false }
+```
+
+# Messaging
+
+When the document format does not match `invalid_format` message is added to the errors on field.
+When the document verification digit is invalid `invalid_verification_digit`.
+However you can add a custom message that substitute the above messages.
+
+```rb
+validates :document_number, 'bra_document_validation/cpf': { message: :invalid }
+validates :document_number, 'bra_document_validation/cnpj': { message 'A custom message' }
+```
 
 ## Development
 
