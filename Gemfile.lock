@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bra_document_validation (1.0.0)
+    bra_document_validation (1.0.1)
       activemodel (>= 4.0)
       bra_documents
 
