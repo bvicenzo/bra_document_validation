@@ -1,5 +1,7 @@
 # BraDocumentValidation
 
+[![Build Status](https://travis-ci.com/bvicenzo/bra_document_validation.svg?branch=master)](https://travis-ci.com/bvicenzo/bra_document_validation)
+
 This gem allows to validate Brazilian documents, CPF and CNPJ, with format and digit verification.
 
 ## Installation
