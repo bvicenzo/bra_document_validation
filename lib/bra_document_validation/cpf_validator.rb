@@ -7,9 +7,9 @@ module BraDocumentValidation
     NOT_NUMBER_PATTERN = /\D/.freeze
 
     def validate_each(record, attribute, value)
-      return record.errors.add(attribute, :invalid_format) unless document_format.match?(value.to_s)
+      return record.errors.add(attribute, error_message(:invalid_format)) unless document_format.match?(value.to_s)
       full_number = only_numbers_for(value.to_s)
-      record.errors.add(attribute, :invalid_verification_digit) if black_listed?(full_number) || !digit_verified?(full_number)
+      record.errors.add(attribute, error_message(:invalid_verification_digit)) if black_listed?(full_number) || !digit_verified?(full_number)
     end
 
     private
@@ -34,6 +34,10 @@ module BraDocumentValidation
 
     def document_format
       options[:formatted] ? FORMATTED_CPF_PATTERN : RAW_CPF_PATTERN
+    end
+
+    def error_message(default_message)
+      options.fetch(:message, default_message)
     end
   end
 end

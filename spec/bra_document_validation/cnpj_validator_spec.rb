@@ -144,5 +144,53 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
         end
       end
     end
+
+    describe 'messaging' do
+      context 'when message is not given' do
+        subject(:cnpj_validator) { described_class.new(attributes: [attribute]) }
+
+        context 'and document has an invalid format' do
+          let(:attr_value) { '32648824000169a' }
+
+          it 'points an invalid format message' do
+            expect(errors).to receive(:add).with(attribute, :invalid_format)
+            cnpj_validator.validate_each(record, attribute, attr_value)
+          end
+        end
+
+        context 'and document has an invalid verification diigit' do
+          let(:attr_value) { '32648824000164' }
+
+          it 'points an invalid verification digit message' do
+
+            expect(errors).to receive(:add).with(attribute, :invalid_verification_digit)
+            cnpj_validator.validate_each(record, attribute, attr_value)
+          end
+        end
+      end
+
+      context 'when message is given' do
+        subject(:cnpj_validator) { described_class.new(attributes: [attribute], message: :invalid) }
+
+        context 'and document has an invalid format' do
+          let(:attr_value) { '32648824000169a' }
+
+          it 'points the custom message' do
+            expect(errors).to receive(:add).with(attribute, :invalid)
+            cnpj_validator.validate_each(record, attribute, attr_value)
+          end
+        end
+
+        context 'and document has an invalid verification diigit' do
+          let(:attr_value) { '32648824000164' }
+
+          it 'points the custom message' do
+
+            expect(errors).to receive(:add).with(attribute, :invalid)
+            cnpj_validator.validate_each(record, attribute, attr_value)
+          end
+        end
+      end
+    end
   end
 end
