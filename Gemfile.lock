@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bra_document_validation (0.1.0)
+    bra_document_validation (1.0.0)
       activemodel (>= 4.0)
       bra_documents
 
@@ -44,9 +44,9 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
     thread_safe (0.3.6)
-    tzinfo (1.2.7)
+    tzinfo (1.2.8)
       thread_safe (~> 0.1)
-    zeitwerk (2.4.0)
+    zeitwerk (2.4.1)
 
 PLATFORMS
   ruby
