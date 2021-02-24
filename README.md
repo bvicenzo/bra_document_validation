@@ -27,6 +27,16 @@ validates :document_number, 'bra_document_validation/cpf': true
 validates :document_number, 'bra_document_validation/cnpj': true
 ```
 
+You might need add CPF and CNPJ acronyms to inflactions.
+
+```rb
+# config/initializers/inflections.rb
+ActiveSupport::Inflector.inflections do |inflect|
+    inflect.acronym 'CPF'
+    inflect.acronym 'CNPJ'
+end
+```
+
 # Format
 
 By default, it expects a raw document number (only numbers).
