@@ -2,14 +2,18 @@
 
 module BraDocumentValidation
   class CNPJValidator < ActiveModel::EachValidator
-    FORMATTED_CNPJ_PATTERN = /\A(\d{2}\.\d{3}\.\d{3}\/\d{4})-(\d{2})\Z/.freeze
-    RAW_CNPJ_PATTERN = /\A\d{14}\Z/.freeze
-    NOT_NUMBER_PATTERN = /\D/.freeze
+    FORMATTED_CNPJ_PATTERN = %r{\A(\d{2}\.\d{3}\.\d{3}/\d{4})-(\d{2})\Z}
+    RAW_CNPJ_PATTERN = /\A\d{14}\Z/
+    NOT_NUMBER_PATTERN = /\D/
 
     def validate_each(record, attribute, value)
       return record.errors.add(attribute, error_message(:invalid_format)) unless document_format.match?(value.to_s)
+
       full_number = only_numbers_for(value.to_s)
-      record.errors.add(attribute, error_message(:invalid_verification_digit)) if black_listed?(full_number) || !digit_verified?(full_number)
+
+      return unless black_listed?(full_number) || !digit_verified?(full_number)
+
+      record.errors.add(attribute, error_message(:invalid_verification_digit))
     end
 
     private
@@ -17,7 +21,10 @@ module BraDocumentValidation
     def digit_verified?(full_number)
       company_number, matrix_subsidiary_number = numbers_for(full_number)
 
-      full_number == BraDocuments::CNPJGenerator.generate(company_number: company_number, matrix_subsidiary_number: matrix_subsidiary_number)
+      full_number == BraDocuments::CNPJGenerator.generate(
+        company_number: company_number,
+        matrix_subsidiary_number: matrix_subsidiary_number
+      )
     end
 
     def numbers_for(value)
