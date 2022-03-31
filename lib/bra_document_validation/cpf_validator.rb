@@ -2,14 +2,18 @@
 
 module BraDocumentValidation
   class CPFValidator < ActiveModel::EachValidator
-    FORMATTED_CPF_PATTERN = /^(\d{3}\.\d{3}\.\d{3})-(\d{2})$/.freeze
+    FORMATTED_CPF_PATTERN = /^(\d{3}\.\d{3}\.\d{3})-(\d{2})$/
     RAW_CPF_PATTERN = /\A\d{11}\z/
-    NOT_NUMBER_PATTERN = /\D/.freeze
+    NOT_NUMBER_PATTERN = /\D/
 
     def validate_each(record, attribute, value)
       return record.errors.add(attribute, error_message(:invalid_format)) unless document_format.match?(value.to_s)
+
       full_number = only_numbers_for(value.to_s)
-      record.errors.add(attribute, error_message(:invalid_verification_digit)) if black_listed?(full_number) || !digit_verified?(full_number)
+
+      return unless black_listed?(full_number) || !digit_verified?(full_number)
+
+      record.errors.add(attribute, error_message(:invalid_verification_digit))
     end
 
     private
