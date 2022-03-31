@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activemodel', '>= 4.0'
-  spec.add_runtime_dependency 'bra_documents'
+  spec.add_runtime_dependency 'bra_documents', '>= 1.0.1'
 
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'pry-nav'
