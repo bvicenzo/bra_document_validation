@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
+## [1.0.2] - 2022-01-04
+
 - Drop Support for Ruby 2.6 or less
 - Refactory CPF and CNPJ Validators to use new bra_documents's methods
 - Add new validator to check if an attribute is a CPF or a CNPJ
