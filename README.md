@@ -14,17 +14,22 @@ gem 'bra_document_validation'
 
 And then execute:
 
-    $ bundle install
+```sh
+bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install bra_document_validation
+```sh
+gem install bra_document_validation
+```
 
 ## Usage
 
 ```rb
 validates :document_number, 'bra_document_validation/cpf': true
 validates :document_number, 'bra_document_validation/cnpj': true
+validates :document_number, 'bra_document_validation/cpf_or_cnpj': true
 ```
 
 You might need add CPF and CNPJ acronyms to inflactions.
@@ -45,6 +50,7 @@ However you can pass options if your number is formatted.
 ```rb
 validates :document_number, 'bra_document_validation/cpf': { formatted: true }
 validates :document_number, 'bra_document_validation/cnpj': { formatted: false }
+validates :document_number, 'bra_document_validation/cpf_or_cnpj': { formatted: false }
 ```
 
 # Messaging
@@ -56,6 +62,7 @@ However you can add a custom message that substitute the above messages.
 ```rb
 validates :document_number, 'bra_document_validation/cpf': { message: :invalid }
 validates :document_number, 'bra_document_validation/cnpj': { message: 'A custom message' }
+validates :document_number, 'bra_document_validation/cpf_or_cnpj': { message: :invalid }
 ```
 
 ## Development
