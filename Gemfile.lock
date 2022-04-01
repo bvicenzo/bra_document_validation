@@ -3,7 +3,7 @@ PATH
   specs:
     bra_document_validation (1.0.1)
       activemodel (>= 4.0)
-      bra_documents (>= 1.0.1)
+      bra_documents (>= 1.0.2)
 
 GEM
   remote: https://rubygems.org/
