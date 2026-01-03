@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'pry'
-require 'pry-nav'
 require 'bra_document_validation'
 
 RSpec.configure do |config|
