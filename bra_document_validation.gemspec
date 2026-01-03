@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{We can validate CPF and CNPJ formats and verifying digits.}
   spec.homepage      = 'https://github.com/bvicenzo/bra_document_validation'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 3.3.0')
 
   spec.metadata['allowed_push_host'] = 'https://rubygems.org/'
 
