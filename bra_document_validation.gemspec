@@ -28,8 +28,9 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activemodel', '>= 4.0'
-  spec.add_runtime_dependency 'bra_documents', '>= 1.0.2'
+  spec.add_runtime_dependency 'bra_documents', '>= 1.1.0'
 
+  spec.add_development_dependency 'irb'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
 end

@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Update `bra_documents` dependency to `>= 1.1.0` for alphanumeric CNPJ support
+- Update CNPJ validator to support alphanumeric format as per new Brazilian Federal Revenue regulation (effective July 2026)
+  - Reference: https://www.gov.br/receitafederal/pt-br/assuntos/noticias/2024/outubro/cnpj-tera-letras-e-numeros-a-partir-de-julho-de-2026
+
+### Added
+
+- Add IRB as development dependency
+- Add binstubs for rake and rspec
+
 ## [1.0.2] - 2022-01-04
 
 ### Removed

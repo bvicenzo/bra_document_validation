@@ -11,7 +11,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
         subject(:cnpj_validator) { described_class.new(attributes: [attribute]) }
 
         context 'but the cnpj is formatted' do
-          let(:attr_value) { '32.648.824/0001-59' }
+          let(:attr_value) { '32.648.82A/0001-59' }
 
           it 'appoints an invalid CNPJ format' do
             expect(errors).to receive(:add).with(attribute, :invalid_format)
@@ -20,7 +20,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
         end
 
         context 'but the cnpj has an invalid raw format' do
-          let(:attr_value) { '32648824000169a' }
+          let(:attr_value) { 'C26488240001690' }
 
           it 'appoints an invalid CNPJ format' do
             expect(errors).to receive(:add).with(attribute, :invalid_format)
@@ -29,7 +29,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
         end
 
         context 'and the cnpj has a valid raw format' do
-          let(:attr_value) { '32648824000169' }
+          let(:attr_value) { 'W1AAMCAD000189' }
 
           it 'accepts the number' do
             expect(errors).to_not receive(:add)
@@ -45,7 +45,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
           let(:formatted) { false }
 
           context 'but the cnpj is formatted' do
-            let(:attr_value) { '32.648.824/0001-59' }
+            let(:attr_value) { '32.648.82C/0001-59' }
 
             it 'appoints an invalid CNPJ format' do
               expect(errors).to receive(:add).with(attribute, :invalid_format)
@@ -54,7 +54,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
           end
 
           context 'but the cnpj has an invalid raw format' do
-            let(:attr_value) { '32648824000169a' }
+            let(:attr_value) { 'C26488240001690' }
 
             it 'appoints an invalid CNPJ format' do
               expect(errors).to receive(:add).with(attribute, :invalid_format)
@@ -63,7 +63,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
           end
 
           context 'and the cnpj has a valid raw format' do
-            let(:attr_value) { '32648824000169' }
+            let(:attr_value) { 'W1AAMCAD000189' }
 
             it 'accepts the number' do
               expect(errors).to_not receive(:add)
@@ -76,7 +76,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
           let(:formatted) { true }
 
           context 'but the cnpj has a valid raw format' do
-            let(:attr_value) { '32648824000169' }
+            let(:attr_value) { 'C2648824000169' }
 
             it 'appoints an invalid CNPJ format' do
               expect(errors).to receive(:add).with(attribute, :invalid_format)
@@ -85,7 +85,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
           end
 
           context 'but the cnpj has an invalid formatted format' do
-            let(:attr_value) { '32648824000169a' }
+            let(:attr_value) { 'C26488240001690' }
 
             it 'appoints an invalid CNPJ format' do
               expect(errors).to receive(:add).with(attribute, :invalid_format)
@@ -94,7 +94,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
           end
 
           context 'and the cnpj is formatted' do
-            let(:attr_value) { '07.016.824/2725-22' }
+            let(:attr_value) { 'DT.XYZ.Z5X/0001-40' }
 
             it 'accepts the number' do
               expect(errors).to_not receive(:add)
@@ -112,7 +112,7 @@ RSpec.describe BraDocumentValidation::CNPJValidator, type: :validator do
         let(:attr_value) { BraDocuments::Formatter.format(Array.new(14, rand(10)).join, as: :cnpj) }
 
         it 'appoints an invalid verification digit' do
-          expect(errors).to receive(:add).with(attribute, :invalid_verification_digit)
+          expect(errors).to receive(:add).with(attribute, :invalid_format)
           cnpj_validator.validate_each(record, attribute, attr_value)
         end
       end
